@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio de AJAX</title>
+  <link rel="stylesheet" type="text/css" href="ajax.css">
+  <script>
+    // Textos de los estados de la petición (readyState)
+    var ESTADOS = [
+      "0 - UNSENT: petición creada, todavía sin open()",
+      "1 - OPENED: se llamó a open()",
+      "2 - HEADERS_RECEIVED: llegaron las cabeceras",
+      "3 - LOADING: descargando el cuerpo de la respuesta",
+      "4 - DONE: petición completada"
+    ];
+
+    var peticion = null;
+
+    function mostrarContenidos() {
+      var url = document.getElementById("recurso").value;
+
+      // Limpiar los campos antes de cada petición nueva
+      document.getElementById("contenidos").textContent = "";
+      document.getElementById("estados").textContent = "";
+      document.getElementById("codigo").textContent = "";
+      document.getElementById("cabeceras").textContent = "";
+
+      // 1) Crear el objeto XMLHttpRequest
+      peticion = new XMLHttpRequest();
+
+      // 2) Definir qué hacer cada vez que cambia el estado
+      peticion.onreadystatechange = procesarCambioEstado;
+
+      // 3) Abrir y enviar la petición (GET, asíncrona)
+      peticion.open("GET", url, true);
+      peticion.send(null);
+    }
+
+    function procesarCambioEstado() {
+      // Estados de la petición: se agrega uno por cada cambio
+      var estados = document.getElementById("estados");
+      estados.textContent += ESTADOS[peticion.readyState] + "\n";
+
+      // Cuando termina (4), completar el resto de los campos
+      if (peticion.readyState == 4) {
+        // Contenidos del archivo
+        document.getElementById("contenidos").textContent = peticion.responseText;
+
+        // Código y texto de estado (ej: 200 OK, 404 Not Found)
+        document.getElementById("codigo").textContent =
+          peticion.status + " " + peticion.statusText;
+
+        // Todas las cabeceras de la respuesta
+        document.getElementById("cabeceras").textContent =
+          peticion.getAllResponseHeaders();
+      }
+    }
+
+    window.onload = function () {
+      document.getElementById("enviar").onclick = mostrarContenidos;
+    };
+  </script>
+</head>
+<body>
+  <h1>Ejercicio de AJAX</h1>
+
+  <form onsubmit="return false;">
+    <label for="recurso">URL:</label>
+    <input type="text" id="recurso" size="80">
+    <input type="button" id="enviar" value="Mostrar contenidos">
+  </form>
+
+  <div id="principal">
+    <h2>Contenidos del archivo:</h2>
+    <div id="contenidos"></div>
+
+    <h2>Cabeceras HTTP de la respuesta del servidor:</h2>
+    <div id="cabeceras"></div>
+  </div>
+
+  <div id="secundario">
+    <h2>Estados de la petición:</h2>
+    <div id="estados"></div>
+
+    <h2>Código de estado:</h2>
+    <div id="codigo"></div>
+  </div>
+</body>
+</html>
