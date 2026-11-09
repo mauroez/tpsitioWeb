@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   Pepe Argento — Finanzas y golf
+   Hoja de estilos externa (WCAG 1.0 nivel AA)
+
+   Criterios aplicados:
+   - Unidades relativas (rem, em, %, ch) en lugar de px   (WCAG 1.0 – 3.4)
+   - Presentación separada del contenido con CSS          (3.3)
+   - Contraste suficiente entre texto y fondo             (2.2)
+   - Sin movimiento automático ni animaciones             (7.2 / 7.3)
+   - Enlaces siempre subrayados, no sólo por color        (2.1)
+   ========================================================== */
+
+/* ---------- 1. Colores (todos con contraste mínimo 4.5:1 sobre el fondo) ---------- */
+:root{
+  --navy:#1B2430;
+  --panel:#141A24;
+  --gold:#D4AE5A;
+  --green:#7FC096;
+  --red:#F29A8A;
+  --ink:#EDE8DC;
+  --muted:#A9B1BE;
+  --line:rgba(237,232,220,0.2);
+}
+
+/* ---------- 2. Base ---------- */
+*{box-sizing:border-box;}
+html{font-size:100%;}
+body{
+  margin:0;
+  background:var(--navy);
+  color:var(--ink);
+  font-family:'IBM Plex Sans', Arial, Helvetica, sans-serif;
+  font-size:1rem;
+  line-height:1.6;
+}
+h1,h2,h3{
+  font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+  color:var(--ink);
+  margin:0;
+  font-weight:600;
+}
+a{color:var(--gold); text-decoration:underline;}
+a:hover{color:var(--ink);}
+a:focus{
+  color:var(--ink);
+  outline:0.2rem solid var(--gold);
+  outline-offset:0.2rem;
+}
+q{quotes:"\00AB" "\00BB";}
+.wrap{max-width:57.5rem; margin:0 auto; padding:0 1.75rem;}
+
+/* ---------- 3. Enlace para saltar al contenido ---------- */
+.skip-link{
+  position:absolute;
+  left:-100rem;
+  top:0;
+  z-index:10;
+  padding:0.75rem 1rem;
+  background:var(--gold);
+  color:var(--navy);
+  font-weight:600;
+}
+.skip-link:focus{left:0; color:var(--navy);}
+
+/* ---------- 4. Franja superior (estática, sin movimiento) ---------- */
+.ticker-bar{
+  background:var(--panel);
+  border-bottom:thin solid var(--line);
+  padding:0.5625rem 0;
+}
+.ticker-list{
+  list-style:none;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.375rem 2.5rem;
+  font-size:0.875rem;
+  letter-spacing:0.02em;
+  color:var(--muted);
+}
+.up{color:var(--green);}
+.down{color:var(--red);}
+.gold-txt{color:var(--gold);}
+
+/* ---------- 5. Encabezado principal ---------- */
+header.hero{
+  padding:5.5rem 0 4.5rem;
+  display:flex;
+  gap:2.5rem;
+  align-items:center;
+  flex-wrap:wrap;
+  border-bottom:thin solid var(--line);
+}
+.monogram{
+  flex:none;
+  width:7rem;
+  height:7rem;
+  border-radius:50%;
+  border:0.125rem solid var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+  font-size:2.5rem;
+  color:var(--gold);
+}
+.hero-text h1{font-size:3.25rem; line-height:1.15;}
+.hero-text p.role{
+  margin:0.625rem 0 0;
+  color:var(--muted);
+  font-size:1.0625rem;
+  max-width:46ch;
+}
+
+/* ---------- 6. Menú de navegación ---------- */
+nav.menu{border-bottom:thin solid var(--line);}
+nav.menu ul{
+  list-style:none;
+  margin:0;
+  padding:0.875rem 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem 1.75rem;
+}
+nav.menu a{font-weight:500;}
+
+/* ---------- 7. Secciones ---------- */
+section{padding:4rem 0; border-bottom:thin solid var(--line);}
+section:last-of-type{border-bottom:none;}
+section h2{font-size:1.625rem; margin-bottom:0.375rem;}
+section .kicker{
+  margin:0 0 0.25rem;
+  color:var(--gold);
+  font-size:0.875rem;
+  font-weight:500;
+}
+section p{max-width:64ch;}
+section p.muted{color:var(--muted); margin:1.375rem 0 0;}
+
+/* ---------- 8. Currículum (línea de tiempo) ---------- */
+.timeline{
+  list-style:none;
+  margin:1.75rem 0 0;
+  padding:0;
+  display:grid;
+  gap:1.625rem;
+}
+.titem{
+  display:grid;
+  grid-template-columns:7rem 1fr;
+  gap:1.25rem;
+}
+.titem .when{margin:0; color:var(--muted); font-size:0.875rem; padding-top:0.125rem;}
+.titem .what h3{font-size:1.0625rem; margin-bottom:0.1875rem;}
+.titem .what p{margin:0;}
+.titem .what p.place{color:var(--gold); font-size:0.875rem;}
+.titem .what p.desc{margin-top:0.5rem; font-size:0.9375rem; color:var(--muted);}
+
+/* ---------- 9. Golf ---------- */
+.golf-row{
+  display:flex;
+  gap:2.25rem;
+  align-items:center;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
+}
+.golf-icon{flex:none; width:5.375rem; height:5.375rem;}
+.golf-stats{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+.golf-stats strong{
+  display:block;
+  font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+  font-size:1.625rem;
+  color:var(--green);
+}
+.golf-stats span{color:var(--muted); font-size:0.875rem;}
+
+/* ---------- 10. Proyecto actual ---------- */
+.fund-card{
+  margin-top:1.75rem;
+  background:var(--panel);
+  border:thin solid var(--line);
+  border-radius:0.25rem;
+  padding:1.75rem;
+  display:grid;
+  grid-template-columns:1fr 13.75rem;
+  gap:1.75rem;
+  align-items:center;
+}
+.fund-card h3{color:var(--gold); font-size:1.25rem;}
+.fund-card p{color:var(--muted); font-size:0.9375rem; margin:0.625rem 0 0;}
+.fund-chart{width:13.75rem; height:auto;}
+
+/* ---------- 11. Contacto ---------- */
+.contact-list{margin:1.375rem 0 0; display:grid; gap:0.75rem;}
+.contact-list div{display:flex; gap:0.875rem; font-size:0.9375rem;}
+.contact-list dt{color:var(--muted); width:5.625rem; flex:none;}
+.contact-list dd{margin:0;}
+
+/* ---------- 12. Pie de página ---------- */
+footer{padding:1.875rem 0; color:var(--muted); font-size:0.875rem;}
+footer p{margin:0 0 0.5rem;}
+
+/* ---------- 13. Pantallas chicas ---------- */
+@media (max-width:50rem){
+  .hero-text h1{font-size:2.5rem;}
+}
+@media (max-width:38.75rem){
+  .fund-card{grid-template-columns:1fr;}
+}
+@media (max-width:35rem){
+  .hero-text h1{font-size:2.125rem;}
+  .titem{grid-template-columns:1fr;}
+}
